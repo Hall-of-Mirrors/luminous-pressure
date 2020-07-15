@@ -1,0 +1,22 @@
+{
+    "name": "luminous-pressure",
+    "version": "0.0.0",
+    "description": "",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "author": "",
+    "license": "UNLICENSED",
+    "private": false,
+    "bugs": {
+        "url": ""
+    },
+    "homepage": "",
+    "dependencies": {},
+    "__comment": "",
+    "devDependencies": {
+        "serverless": "^1.70.1",
+        "serverless-python-requirements": "^4.3.0"
+    }
+}

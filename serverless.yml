@@ -1,0 +1,64 @@
+service: ${opt:service-name}
+
+frameworkVersion: ">=1.2.0 <2.0.0"
+
+custom:
+  version: ${file(package.json):version}
+  pythonRequirements:
+    dockerizePip: non-linux
+    slim: true
+
+provider:
+  name: aws
+  runtime: python3.8
+  versionFunctions: false
+  region: ${opt:region}
+  logRetentionInDays: 7
+  deploymentPrefix: ${self:service}
+
+  environment:
+    GITISH: ${opt:gitish, 'none'}
+
+  # vpc:
+  #   securityGroupIds:
+  #     - # Filliin
+  #   subnetIds: # Filliem
+
+package:
+  exclude:
+    - "./**"
+    - "!src/**"
+    - "**/__pycache__/**"
+
+functions:
+  handler:
+    description: "Handler that routes messages to appropriate indexer for syncing"
+    handler: src/handler.handler
+    memorySize: 128  # in MB, between 128 and 3008 inclusive, with 64 MB increments
+    timeout: 30 # optional, in seconds, default is 6
+    reservedConcurrency: 5
+    # events:
+    #   - schedule:
+    #       rate: cron(0/5 * * * ? *)
+    #       enabled: true
+    #       input:
+    #         endpoint: 'service/health'
+
+resources:
+  Resources:
+
+    # LambdaSecurityGroup:
+    #   Type: AWS::EC2::SecurityGroup
+    #   Properties:
+    #     GroupName: # Fillin
+    #     GroupDescription: Security group for ${self:service}
+    #     SecurityGroupEgress:
+    #       - Description: 'allow this lambda to connect to any external machine'
+    #         IpProtocol: '-1'
+    #         CidrIp: 0.0.0.0/0
+    #     VpcId: # Fillin
+
+  Outputs:
+
+plugins:
+  - serverless-python-requirements

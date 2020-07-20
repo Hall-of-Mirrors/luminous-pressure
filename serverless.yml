@@ -33,7 +33,7 @@ package:
 functions:
   handler:
     description: "Handler that routes messages to appropriate indexer for syncing"
-    handler: src/handler.handler
+    handler: src_python/handler.handler
     memorySize: 128  # in MB, between 128 and 3008 inclusive, with 64 MB increments
     timeout: 30 # optional, in seconds, default is 6
     reservedConcurrency: 5

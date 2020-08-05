@@ -39,8 +39,8 @@ import {
 } from "reactstrap";
 
 // core components
-import ExamplesNavbar from "../../components/Navbars/ExamplesNavbar.js";
-import Footer from "../../components/Footer/Footer.js";
+import ExamplesNavbar from "../components/Navbars/ExamplesNavbar.js";
+import Footer from "../components/Footer/Footer.js";
 
 class RegisterPage extends React.Component {
   state = {
@@ -82,29 +82,11 @@ class RegisterPage extends React.Component {
         <ExamplesNavbar />
         <div className="wrapper">
           <div className="page-header">
-            <div className="page-header-image" />
             <div className="content">
               <Container>
                 <Row>
-                  <Col className="offset-lg-0 offset-md-3" lg="5" md="6">
-                    <div
-                      className="square square-7"
-                      id="square7"
-                      style={{ transform: this.state.squares7and8 }}
-                    />
-                    <div
-                      className="square square-8"
-                      id="square8"
-                      style={{ transform: this.state.squares7and8 }}
-                    />
+                  <Col className="offset-lg-3 offset-md-3" lg="5" md="6">
                     <Card className="card-register">
-                      <CardHeader>
-                        <CardImg
-                          alt="..."
-                          src={require("../../assets/img/square-purple-1.png")}
-                        />
-                        <CardTitle tag="h4">Register</CardTitle>
-                      </CardHeader>
                       <CardBody>
                         <Form className="form">
                           <InputGroup
@@ -189,37 +171,6 @@ class RegisterPage extends React.Component {
                     </Card>
                   </Col>
                 </Row>
-                <div className="register-bg" />
-                <div
-                  className="square square-1"
-                  id="square1"
-                  style={{ transform: this.state.squares1to6 }}
-                />
-                <div
-                  className="square square-2"
-                  id="square2"
-                  style={{ transform: this.state.squares1to6 }}
-                />
-                <div
-                  className="square square-3"
-                  id="square3"
-                  style={{ transform: this.state.squares1to6 }}
-                />
-                <div
-                  className="square square-4"
-                  id="square4"
-                  style={{ transform: this.state.squares1to6 }}
-                />
-                <div
-                  className="square square-5"
-                  id="square5"
-                  style={{ transform: this.state.squares1to6 }}
-                />
-                <div
-                  className="square square-6"
-                  id="square6"
-                  style={{ transform: this.state.squares1to6 }}
-                />
               </Container>
             </div>
           </div>

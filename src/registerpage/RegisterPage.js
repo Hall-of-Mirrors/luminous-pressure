@@ -19,6 +19,7 @@ import React from "react";
 import classnames from "classnames";
 // reactstrap components
 import {
+  Alert,
   Button,
   Card,
   CardHeader,
@@ -41,42 +42,41 @@ import {
 // core components
 import ExamplesNavbar from "../components/Navbars/ExamplesNavbar.js";
 import Footer from "../components/Footer/Footer.js";
+import Validation from "../components/Validation/Validation.js";
 
 class RegisterPage extends React.Component {
-  state = {
-    squares1to6: "",
-    squares7and8: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isValidEmail: true,
+      isValidPassword: true,
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
   componentDidMount() {
-    document.body.classList.toggle("register-page");
-    document.documentElement.addEventListener("mousemove", this.followCursor);
+    // document.body.classList.toggle("register-page");
   }
   componentWillUnmount() {
-    document.body.classList.toggle("register-page");
-    document.documentElement.removeEventListener(
-      "mousemove",
-      this.followCursor
-    );
+    // document.body.classList.toggle("register-page");
   }
-  followCursor = event => {
-    let posX = event.clientX - window.innerWidth / 2;
-    let posY = event.clientY - window.innerWidth / 6;
-    this.setState({
-      squares1to6:
-        "perspective(500px) rotateY(" +
-        posX * 0.05 +
-        "deg) rotateX(" +
-        posY * -0.05 +
-        "deg)",
-      squares7and8:
-        "perspective(500px) rotateY(" +
-        posX * 0.02 +
-        "deg) rotateX(" +
-        posY * -0.02 +
-        "deg)"
-    });
-  };
+  
   render() {
+    const isValidEmail = this.state.isValidEmail
+    let error;
+    if (isValidEmail) {
+      error = <Validation color="success" value='Shit Checks Out' />
+    } else {
+      error =  <Validation color="danger" value='Invalid Email Format' />
+    }
     return (
       <>
         <ExamplesNavbar />
@@ -89,27 +89,6 @@ class RegisterPage extends React.Component {
                     <Card className="card-register">
                       <CardBody>
                         <Form className="form">
-                          <InputGroup
-                            className={classnames({
-                              "input-group-focus": this.state.fullNameFocus
-                            })}
-                          >
-                            <InputGroupAddon addonType="prepend">
-                              <InputGroupText>
-                                <i className="tim-icons icon-single-02" />
-                              </InputGroupText>
-                            </InputGroupAddon>
-                            <Input
-                              placeholder="Full Name"
-                              type="text"
-                              onFocus={e =>
-                                this.setState({ fullNameFocus: true })
-                              }
-                              onBlur={e =>
-                                this.setState({ fullNameFocus: false })
-                              }
-                            />
-                          </InputGroup>
                           <InputGroup
                             className={classnames({
                               "input-group-focus": this.state.emailFocus
@@ -127,6 +106,7 @@ class RegisterPage extends React.Component {
                               onBlur={e => this.setState({ emailFocus: false })}
                             />
                           </InputGroup>
+                          {error}
                           <InputGroup
                             className={classnames({
                               "input-group-focus": this.state.passwordFocus
@@ -148,26 +128,11 @@ class RegisterPage extends React.Component {
                               }
                             />
                           </InputGroup>
-                          <FormGroup check className="text-left">
-                            <Label check>
-                              <Input type="checkbox" />
-                              <span className="form-check-sign" />I agree to the{" "}
-                              <a
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                              >
-                                terms and conditions
-                              </a>
-                              .
-                            </Label>
-                          </FormGroup>
                         </Form>
-                      </CardBody>
-                      <CardFooter>
                         <Button className="btn-round" color="primary" size="lg">
                           Get Started
                         </Button>
-                      </CardFooter>
+                      </CardBody>
                     </Card>
                   </Col>
                 </Row>
